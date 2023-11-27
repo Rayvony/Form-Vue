@@ -1,26 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<SignUpForm :onSubmit="handleSubmit"/>
+<ModalBox v-if="isOpen"  @close="closeModal" :data="data"/> 
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import ModalBox from './components/ModalBox.vue';
+import SignUpForm from './components/SignUpForm.vue';
+import { ref } from 'vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const data = ref({})
+const isOpen = ref(false);
+
+function handleSubmit(formData){
+  data.value = formData;
+  isOpen.value = true;
+}
+
+function closeModal(){
+  isOpen.value = false;
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
+}
+
+body{
+  margin: 0;
+  background: #eee;
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
 </style>
